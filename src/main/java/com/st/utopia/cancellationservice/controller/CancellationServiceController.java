@@ -21,11 +21,11 @@ import javassist.NotFoundException;
 public class CancellationServiceController {
 	
 	@Autowired
-	TicketService ticketservice;
+	private TicketService ticketservice;
 	
 	
 	@GetMapping("/FindTicket/{flightNumber}/{rowNumber}/{seat}")
-	public ResponseEntity<Ticket> getPublisher(@PathVariable int flightNumber, @PathVariable int rowNumber,@PathVariable char seat) throws NotFoundException {
+	public ResponseEntity<Ticket> getTicket(@PathVariable int flightNumber, @PathVariable int rowNumber,@PathVariable char seat) throws NotFoundException {
 		Ticket ticket = ticketservice.findTicket(flightNumber, rowNumber, seat);
 		if(ticket == null) {
 			throw new NotFoundException("ticket with flightNumber=" + flightNumber + " not found");
@@ -36,7 +36,7 @@ public class CancellationServiceController {
 	
 	
 	@PutMapping("/ticket/flight/{flightNumber}/rowNumber/{rowNumber}/seat/{seat}")
-	public ResponseEntity<Ticket> CancelResirvation(@PathVariable int flightNumber, @PathVariable int rowNumber,@PathVariable char seat) 
+	public ResponseEntity<Ticket> cancelResirvation(@PathVariable int flightNumber, @PathVariable int rowNumber,@PathVariable char seat) 
 	throws NotFoundException {
 		
 		Ticket ticket = ticketservice.findTicket(flightNumber, rowNumber, seat);

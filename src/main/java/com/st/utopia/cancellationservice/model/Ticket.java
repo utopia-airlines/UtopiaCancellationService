@@ -36,19 +36,19 @@ public class Ticket{
 	private TicketIdentity id;
 	
 	@Column(name="class")
-	Integer tier; //class is a keyword 
+	private Integer tier; //class is a keyword 
 	
 	@Column(name="reserver")
-	Integer reserver;
+	private Integer reserver;
 	
 	@Column(name="price")
-	Integer price;
+	private Integer price;
 	
 	@Column(name="reservation_timeout")
-	LocalDateTime reservation_timeout;
+	private LocalDateTime reservation_timeout;
 	
 	@Column(name="booking_id")
-	String booking_id;
+	private String booking_id;
 	/**
 	 * the Getters and Setters of the Class
 	 */
@@ -108,19 +108,19 @@ public class Ticket{
 		this.price = price;
 	}
 
-	public LocalDateTime getReservation_timeout() {
+	public LocalDateTime getReservationtimeout() {
 		return reservation_timeout;
 	}
 
-	public void setReservation_timeout(LocalDateTime reservation_timeout) {
+	public void setReservationtimeout(LocalDateTime reservation_timeout) {
 		this.reservation_timeout = reservation_timeout;
 	}
 
-	public String getBooking_id() {
+	public String getBookingid() {
 		return booking_id;
 	}
 
-	public void setBooking_id(String booking_id) {
+	public void setBookingid(String booking_id) {
 		this.booking_id = booking_id;
 	}
 

@@ -27,7 +27,7 @@ public class TicketService {
 	 */
 	public void CancelReservation(int flight, int row, char seat){
 
-			ticketDao.Cancel(flight, row, seat);
+			ticketDao.cancel(flight, row, seat);
 }
 	
 

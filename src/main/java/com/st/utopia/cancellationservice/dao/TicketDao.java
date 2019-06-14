@@ -29,17 +29,17 @@ public interface TicketDao extends JpaRepository<Ticket, TicketIdentity>{
 // @Query("UPDATE Ticket SET reserver = null, reservation_timeout = null, booking_id = null WHERE flight = ?1 and row = ?2 and seat = ?3")
 // void UpdateTicket(int flight, int row, char seat);
 
-	default void Cancel(Integer flight, Integer row, Character seat) {
+	default void cancel(Integer flight, Integer row, Character seat) {
 		final TicketIdentity id = new TicketIdentity(flight, row, seat);
 		final Optional<Ticket> record = findById(id);
 		if (record.isPresent()) {
 			final Ticket inner = record.get();
-			if (inner.getBooking_id() == null) {
+			if (inner.getBookingid() == null) {
                 System.out.println("Ticket does not existe!");
 			}
 			else {
-				inner.setBooking_id(null);
-				inner.setReservation_timeout(null);
+				inner.setBookingid(null);
+				inner.setReservationtimeout(null);
 				inner.setReserver(null);
 				save(inner);
 			}

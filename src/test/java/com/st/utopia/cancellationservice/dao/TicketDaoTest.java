@@ -7,10 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,29 +21,14 @@ import com.st.utopia.cancellationservice.model.Ticket;
 public class TicketDaoTest {
 	
 	@Autowired
-	TicketDao ticketdao;
+    private TicketDao ticketdao;
 	
     public TicketDaoTest() {
     }
 	
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
     
     @Test
-    public void CreateTicket() {
+    public void createTicket() {
     	LocalDateTime dout = LocalDateTime.parse("28-01-2019 12:00",DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     	Ticket t = new Ticket(1 , 11, 'B',11, 1, 1500, dout,"jhytrfgr");
     	ticketdao.save(t);
@@ -55,16 +36,16 @@ public class TicketDaoTest {
     }
 
     @Test
-    public void GetTicket() {
+    public void getTicket() {
     	Ticket t = ticketdao.getTicket(1, 1, 'A'); 
     	assertTrue(t.getPrice() == 123);
     }
     
     @Test
-    public void CancelTicket() {
-    	ticketdao.Cancel(1, 1, 'A');
+    public void cancelTicket() {
+    	ticketdao.cancel(1, 1, 'A');
     	Ticket t = ticketdao.getTicket(1, 1, 'A');
-    	assertEquals(t.getBooking_id(), null);
+    	assertEquals(t.getBookingid(), null);
     	
     }
 

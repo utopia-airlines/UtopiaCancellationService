@@ -26,17 +26,17 @@ public class TicketIdentity implements Serializable {
 	 * the flight ID.
 	 */
 	@Column(name="flight")
-	Integer flight;
+	private Integer flight;
 	/**
 	 * the row of the seat .
 	 */
 	@Column(name="seat_row")
-	Integer row;
+	private Integer row;
 	/**
 	 * the seat group.
 	 */
 	@Column(name="seat")
-	Character seat;
+	private Character seat;
 	/**
 	 * the Getters and Setters of the Class
 	 */
