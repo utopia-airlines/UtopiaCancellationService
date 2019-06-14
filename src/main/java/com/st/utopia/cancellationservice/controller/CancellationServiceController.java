@@ -44,7 +44,7 @@ public class CancellationServiceController {
 			throw new NotFoundException("cancellation failed. ticket with flight number=" + flightNumber + " not found");
 		}
 		
-		ticketservice.CancelReservation(flightNumber, rowNumber, seat);
+		ticketservice.cancelReservation(flightNumber, rowNumber, seat);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

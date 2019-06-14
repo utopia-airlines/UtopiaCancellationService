@@ -25,7 +25,7 @@ public class TicketService {
 	/**
 	 * Cancel Ticket function.
 	 */
-	public void CancelReservation(int flight, int row, char seat){
+	public void cancelReservation(int flight, int row, char seat){
 
 			ticketDao.cancel(flight, row, seat);
 }

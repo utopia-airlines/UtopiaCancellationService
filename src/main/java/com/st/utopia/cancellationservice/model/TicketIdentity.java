@@ -67,43 +67,6 @@ public class TicketIdentity implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((flight == null) ? 0 : flight.hashCode());
-		result = prime * result + ((row == null) ? 0 : row.hashCode());
-		result = prime * result + ((seat == null) ? 0 : seat.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TicketIdentity other = (TicketIdentity) obj;
-		if (flight == null) {
-			if (other.flight != null)
-				return false;
-		} else if (!flight.equals(other.flight))
-			return false;
-		if (row == null) {
-			if (other.row != null)
-				return false;
-		} else if (!row.equals(other.row))
-			return false;
-		if (seat == null) {
-			if (other.seat != null)
-				return false;
-		} else if (!seat.equals(other.seat))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "TicketIdentity [flight=" + flight + ", row=" + row + ", seat=" + seat + "]";
 	}

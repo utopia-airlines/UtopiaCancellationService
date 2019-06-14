@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.st.utopia.cancellationservice.dao.TicketDao;
+
 import com.st.utopia.cancellationservice.model.Ticket;
 
 
@@ -18,15 +18,13 @@ import com.st.utopia.cancellationservice.model.Ticket;
 public class TicketServiceTest {
 
 	@Autowired
-	TicketDao ticketdao;
-	@Autowired
 	private TicketService ticketservice;
 	
 
     @Test
-    public void CancelReservationTest() {
+    public void cancelReservationTest() {
     	
-    	ticketservice.CancelReservation(1, 5, 'B');
+    	ticketservice.cancelReservation(1, 5, 'B');
     	Ticket t = ticketservice.findTicket(1, 5, 'B');
     	assertEquals(t.getBookingid(), null);
     	
