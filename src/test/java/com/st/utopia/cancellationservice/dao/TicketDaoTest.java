@@ -28,7 +28,7 @@ public class TicketDaoTest {
     	LocalDateTime dout = LocalDateTime.parse("28-01-2019 12:00",DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
     	Ticket t = new Ticket(1 , 11, 'B',11, 1, 1500, dout,"jhytrfgr");
     	ticketdao.save(t);
-    	assertTrue(t.getBookingid() == "jhytrfgr");
+    	assertTrue(t.getBookingid().equals("jhytrfgr"));
     }
 
     @Test
