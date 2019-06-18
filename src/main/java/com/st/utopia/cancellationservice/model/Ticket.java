@@ -14,41 +14,39 @@ import javax.persistence.Table;
  * 
  * Model used for the purpose of the cancellation microservice.
  * 
- * There are no set methods for information about the ticket such as flight number, row/seat, or class.
+ * There are no set methods for information about the ticket such as flight
+ * number, row/seat, or class.
  * 
- * Upon cancelling the ticket, the microservice needs to set the following fields as null:
- * 	-reserver
- * 	-price
- * 	-reservation_timeout
- * 	-booking_id
+ * Upon cancelling the ticket, the microservice needs to set the following
+ * fields as null: -reserver -price -reservation_timeout -booking_id
  * 
- * This model does not need to define a composite key since the cancellation microservice will search for the ticket via booking_id which is unique
+ * This model does not need to define a composite key since the cancellation
+ * microservice will search for the ticket via booking_id which is unique
  * 
  * 
  * @author Al-amine AHMED MOUSSA
- */ 
+ */
 
 @Entity
-@Table(name="tbl_tickets")
-public class Ticket{
+@Table(name = "tbl_tickets")
+public class Ticket {
 	/**
 	 * The three fields that together constitute the identity of a Ticket.
 	 */
 	@EmbeddedId
 	private TicketIdentity id;
-	
-	@Column(name="class")
-	private Integer tier; //class is a keyword 
+
+	@Column(name = "class")
+	private Integer tier; // class is a keyword
 
 	private Integer reserver;
-		
+
 	private Integer price;
-	
-	@Column(name="reservation_timeout")
+
 	private LocalDateTime reservationTimeout;
-	
-	@Column(name="booking_id")
+
 	private String bookingId;
+
 	/**
 	 * the Getters and Setters of the Class
 	 */
@@ -63,7 +61,7 @@ public class Ticket{
 			return id.getFlight();
 		}
 	}
-	
+
 	public Integer getRow() {
 		if (id == null) {
 			return null;
@@ -71,7 +69,7 @@ public class Ticket{
 			return id.getRow();
 		}
 	}
-	
+
 	public char getSeat() {
 		if (id == null) {
 			return 0;
@@ -119,10 +117,10 @@ public class Ticket{
 	public void setBookingid(String bookingId) {
 		this.bookingId = bookingId;
 	}
-	
+
 	/*
-	 * we need empty Constructor for Hibernate Jpa Purposes 
-	 */ 
+	 * we need empty Constructor for Hibernate Jpa Purposes
+	 */
 	public Ticket() {
 	}
 
@@ -139,7 +137,7 @@ public class Ticket{
 		this.reservationTimeout = reservationTimeout;
 		this.bookingId = bookingId;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -147,12 +145,11 @@ public class Ticket{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		} else if (obj instanceof Ticket) {
+			return Objects.equals(id, ((Ticket) obj).id);
+		}
 		Ticket other = (Ticket) obj;
 		return Objects.equals(id, other.id);
 	}

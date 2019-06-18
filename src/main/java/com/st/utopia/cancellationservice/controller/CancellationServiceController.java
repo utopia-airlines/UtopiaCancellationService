@@ -16,19 +16,20 @@ import javassist.NotFoundException;
 @RestController
 @RequestMapping("/cancel")
 public class CancellationServiceController {
-	
+
 	@Autowired
 	private TicketService ticketservice;
-	
+
 	/**
-	 * Only the holder of the Ticket can cancel the reservation, or the agent if the ticket is booked from the counter.
+	 * Only the holder of the Ticket should be able to cancel the reservation, or
+	 * the agent if the ticket is booked from the counter.
 	 * 
 	 */
-	@PutMapping("/ticket/flight/{flightNumber}/rowNumber/{rowNumber}/seat/{seat}")
-	public ResponseEntity<Ticket> cancelReservation(@PathVariable int flightNumber, @PathVariable int rowNumber,@PathVariable char seat) 
-	throws NotFoundException {
+	@PutMapping("/ticket/flight/{flightNumber}/row/{rowNumber}/seat/{seat}")
+	public ResponseEntity<Ticket> cancelReservation(@PathVariable int flightNumber, @PathVariable int rowNumber,
+			@PathVariable char seat) throws NotFoundException {
 		Ticket ticket = ticketservice.findTicket(flightNumber, rowNumber, seat);
-		if(ticket == null) {
+		if (ticket == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		ticketservice.cancelReservation(flightNumber, rowNumber, seat);
