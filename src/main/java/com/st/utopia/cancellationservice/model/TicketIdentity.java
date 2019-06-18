@@ -2,6 +2,7 @@ package com.st.utopia.cancellationservice.model;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -54,7 +55,8 @@ public class TicketIdentity implements Serializable {
 	
 	/**
 	 * the Constructors of the Class
-	 */
+	 * we need empty Constructor for Hibernate Jpa Purposes 
+	 */ 
 
 	public TicketIdentity() {
 		
@@ -64,6 +66,24 @@ public class TicketIdentity implements Serializable {
 		this.flight = flight;
 		this.row = row;
 		this.seat = seat;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(flight, row, seat);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TicketIdentity other = (TicketIdentity) obj;
+		return Objects.equals(flight, other.flight) && Objects.equals(row, other.row)
+				&& Objects.equals(seat, other.seat);
 	}
 
 	@Override

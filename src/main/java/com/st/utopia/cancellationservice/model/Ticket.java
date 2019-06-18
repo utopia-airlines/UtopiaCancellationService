@@ -1,6 +1,7 @@
 package com.st.utopia.cancellationservice.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -8,10 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * An Ticket model.
+ * A Ticket model.
  *
- * @author Henry Cho
- * @author Al-amine AHMED MOUSSA
  * 
  * Model used for the purpose of the cancellation microservice.
  * 
@@ -23,7 +22,10 @@ import javax.persistence.Table;
  * 	-reservation_timeout
  * 	-booking_id
  * 
- * This model does not need to define a composite key since the cancellation microservice will search for the ticket via booking_id which is unique.
+ * This model does not need to define a composite key since the cancellation microservice will search for the ticket via booking_id which is unique
+ * 
+ * 
+ * @author Al-amine AHMED MOUSSA
  */ 
 
 @Entity
@@ -37,27 +39,21 @@ public class Ticket{
 	
 	@Column(name="class")
 	private Integer tier; //class is a keyword 
-	
-	@Column(name="reserver")
+
 	private Integer reserver;
-	
-	@Column(name="price")
+		
 	private Integer price;
 	
 	@Column(name="reservation_timeout")
-	private LocalDateTime reservation_timeout;
+	private LocalDateTime reservationTimeout;
 	
 	@Column(name="booking_id")
-	private String booking_id;
+	private String bookingId;
 	/**
 	 * the Getters and Setters of the Class
 	 */
 	public TicketIdentity getId() {
 		return id;
-	}
-
-	public void setId(TicketIdentity id) {
-		this.id = id;
 	}
 
 	public Integer getFlight() {
@@ -109,60 +105,44 @@ public class Ticket{
 	}
 
 	public LocalDateTime getReservationtimeout() {
-		return reservation_timeout;
+		return reservationTimeout;
 	}
 
-	public void setReservationtimeout(LocalDateTime reservation_timeout) {
-		this.reservation_timeout = reservation_timeout;
+	public void setReservationtimeout(LocalDateTime reservationTimeout) {
+		this.reservationTimeout = reservationTimeout;
 	}
 
 	public String getBookingid() {
-		return booking_id;
+		return bookingId;
 	}
 
-	public void setBookingid(String booking_id) {
-		this.booking_id = booking_id;
+	public void setBookingid(String bookingId) {
+		this.bookingId = bookingId;
 	}
-
+	
+	/*
+	 * we need empty Constructor for Hibernate Jpa Purposes 
+	 */ 
 	public Ticket() {
-
 	}
 
 	public Ticket(TicketIdentity id) {
 		this.id = id;
 	}
 
-	public Ticket(TicketIdentity id, Integer tier, Integer reserver, Integer price, LocalDateTime reservation_timeout,
-			String booking_id) {
+	public Ticket(TicketIdentity id, Integer tier, Integer reserver, Integer price, LocalDateTime reservationTimeout,
+			String bookingId) {
 		this.id = id;
 		this.tier = tier;
 		this.reserver = reserver;
 		this.price = price;
-		this.reservation_timeout = reservation_timeout;
-		this.booking_id = booking_id;
+		this.reservationTimeout = reservationTimeout;
+		this.bookingId = bookingId;
 	}
 	
-	public Ticket(final Integer flight , final Integer row, final Character seat,
-			Integer tier, Integer reserver, Integer price, LocalDateTime reservation_timeout,String booking_id) {
-		if (flight == null && row == null && seat == null) {
-			id = null;
-		} else {
-			id = new TicketIdentity(flight, row,seat);
-		}
-		// TODO: check that it's nonnegative?
-		this.tier = tier;
-		this.reserver = reserver;
-		this.price = price;
-		this.reservation_timeout = reservation_timeout;
-		this.booking_id = booking_id;
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -174,18 +154,13 @@ public class Ticket{
 		if (getClass() != obj.getClass())
 			return false;
 		Ticket other = (Ticket) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
 		return "Ticket [id=" + id + ", tier=" + tier + ", reserver=" + reserver + ", price=" + price
-				+ ", reservation_timeout=" + reservation_timeout + ", booking_id=" + booking_id + "]";
+				+ ", reservationTimeout=" + reservationTimeout + ", bookingId=" + bookingId + "]";
 	}
 
 }
