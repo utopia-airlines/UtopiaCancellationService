@@ -29,12 +29,12 @@ public class TicketService {
 		final Optional<Ticket> record = ticketDao.findById(id);
 		if (record.isPresent()) {
 			final Ticket inner = record.get();
-			if (inner.getBookingid() == null) {
+			if (inner.getBookingId() == null) {
 				LOGGER.log(Level.SEVERE, "Ticket with the Id, flight :" + flight + ",row :" + row + ",seat :" + seat
 						+ ", is not reserved in the first place");
 			} else {
-				inner.setBookingid(null);
-				inner.setReservationtimeout(null);
+				inner.setBookingId(null);
+				inner.setReservationTimeout(null);
 				inner.setReserver(null);
 				ticketDao.save(inner);
 			}
@@ -50,8 +50,8 @@ public class TicketService {
 	public Ticket findTicket(int flight, int row, char seat) {
 		Ticket foundTicket = ticketDao.getTicket(flight, row, seat);
 		if (foundTicket == null) {
-			LOGGER.log(Level.SEVERE, "Ticket with the Id, flight :" + flight + ",row :" + row + ",seat :" + seat
-					+ ", is not reserved in the first place");
+			LOGGER.log(Level.SEVERE,
+					"Ticket with the Id, flight :" + flight + ",row :" + row + ",seat :" + seat + ", does not exist");
 			return null;
 		} else {
 			return foundTicket;

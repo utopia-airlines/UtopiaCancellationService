@@ -102,19 +102,19 @@ public class Ticket {
 		this.price = price;
 	}
 
-	public LocalDateTime getReservationtimeout() {
+	public LocalDateTime getReservationTimeout() {
 		return reservationTimeout;
 	}
 
-	public void setReservationtimeout(LocalDateTime reservationTimeout) {
+	public void setReservationTimeout(LocalDateTime reservationTimeout) {
 		this.reservationTimeout = reservationTimeout;
 	}
 
-	public String getBookingid() {
+	public String getBookingId() {
 		return bookingId;
 	}
 
-	public void setBookingid(String bookingId) {
+	public void setBookingId(String bookingId) {
 		this.bookingId = bookingId;
 	}
 
@@ -150,8 +150,7 @@ public class Ticket {
 		} else if (obj instanceof Ticket) {
 			return Objects.equals(id, ((Ticket) obj).id);
 		}
-		Ticket other = (Ticket) obj;
-		return Objects.equals(id, other.id);
+		return false;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.st.utopia.cancellationservice.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,14 +21,14 @@ public class TicketServiceTest {
 	public void cancelReservationTest() {
 		ticketservice.cancelReservation(1, 5, 'B');
 		Ticket t = ticketservice.findTicket(1, 5, 'B');
-		assertNull(t.getBookingid());
+		assertNull(t.getBookingId());
 	}
 
 	@Test
 	public void findTicketTest() {
 		Ticket t = ticketservice.findTicket(1, 1, 'A');
 		Integer price = 123;
-		assertNull(t.getBookingid());
-		assertTrue(t.getPrice().equals(price));
+		assertNull(t.getBookingId());
+		assertEquals(price, t.getPrice());
 	}
 }

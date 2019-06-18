@@ -1,7 +1,6 @@
 package com.st.utopia.cancellationservice.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,14 +25,14 @@ public class TicketDaoTest {
 		Ticket t = new Ticket(new TicketIdentity(1, 11, 'B'), 11, 1, 1500, dout, "jhytrfgr");
 		ticketdao.save(t);
 		Ticket createdTicket = ticketdao.getTicket(1, 11, 'B');
-		assertEquals(t.getBookingid(), createdTicket.getBookingid());
+		assertEquals(t.getBookingId(), createdTicket.getBookingId());
 	}
 
 	@Test
 	public void getTicket() {
 		Ticket t = ticketdao.getTicket(1, 1, 'A');
 		Integer price = 123;
-		assertTrue(t.getPrice().equals(price));
+		assertEquals(price,t.getPrice());
 	}
 
 }

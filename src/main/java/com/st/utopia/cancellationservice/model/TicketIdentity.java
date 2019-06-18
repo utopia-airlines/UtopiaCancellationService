@@ -74,15 +74,12 @@ public class TicketIdentity implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TicketIdentity other = (TicketIdentity) obj;
-		return Objects.equals(flight, other.flight) && Objects.equals(row, other.row)
-				&& Objects.equals(seat, other.seat);
+		} else if (obj instanceof TicketIdentity) {
+			return Objects.equals(flight, ((TicketIdentity) obj).flight);
+		}
+		return false;
 	}
 
 	@Override
