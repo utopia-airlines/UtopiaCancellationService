@@ -27,6 +27,15 @@ public class TicketDaoTest {
 		Ticket createdTicket = ticketdao.getTicket(1, 11, 'B');
 		assertEquals(t.getBookingId(), createdTicket.getBookingId());
 	}
+	
+	@Test
+	public void createTicketB() {
+		LocalDateTime dout = LocalDateTime.parse("28-01-2019 12:00", DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+		Ticket t = new Ticket(new TicketIdentity(1, 12, 'B'), 11, 1, 4500, dout, "abc15");
+		ticketdao.save(t);
+		Ticket createdTicket = ticketdao.getTicket(1, 12, 'B');
+		assertEquals(t.getBookingId(), createdTicket.getBookingId());
+	}
 
 	@Test
 	public void getTicket() {
@@ -34,5 +43,11 @@ public class TicketDaoTest {
 		Integer price = 123;
 		assertEquals(price,t.getPrice());
 	}
-
+	
+	@Test
+	public void findTicketByBookingId() {
+		Ticket t = ticketdao.findByBookingId("abc157");
+		Integer price = 4500;
+		assertEquals(price,t.getPrice());
+	}
 }

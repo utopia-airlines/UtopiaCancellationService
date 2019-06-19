@@ -22,9 +22,9 @@ public class TicketService {
 	private static final Logger LOGGER = Logger.getLogger(TicketService.class.getName());
 
 	/**
-	 * Cancel Ticket function.
+	 * Cancel Ticket function.(by flight number, row and seat)
 	 */
-	public void cancelReservation(int flight, int row, char seat) {
+	public void cancelReservationById(int flight, int row, char seat) {
 		final TicketIdentity id = new TicketIdentity(flight, row, seat);
 		final Optional<Ticket> record = ticketDao.findById(id);
 		if (record.isPresent()) {
@@ -45,13 +45,42 @@ public class TicketService {
 	}
 
 	/**
-	 * find Ticket function.
+	 * Cancel Ticket function.(by Booking ID)
 	 */
-	public Ticket findTicket(int flight, int row, char seat) {
+	public void cancelReservationByBookingId(String bookingId) {
+		final Ticket record = ticketDao.findByBookingId(bookingId);
+		if (record != null) {
+			record.setBookingId(null);
+			record.setReservationTimeout(null);
+			record.setReserver(null);
+			ticketDao.save(record);
+		} else {
+			LOGGER.log(Level.SEVERE, "No reserved Ticket with the Booking ID :" + bookingId + " found.");
+		}
+	}
+
+	/**
+	 * find Ticket function By ID.
+	 */
+	public Ticket findTicketById(int flight, int row, char seat) {
 		Ticket foundTicket = ticketDao.getTicket(flight, row, seat);
 		if (foundTicket == null) {
 			LOGGER.log(Level.SEVERE,
 					"Ticket with the Id, flight :" + flight + ",row :" + row + ",seat :" + seat + ", does not exist");
+			return null;
+		} else {
+			return foundTicket;
+		}
+
+	}
+
+	/**
+	 * find Ticket function By Booking ID.
+	 */
+	public Ticket findTicketByBookingId(String bookingId) {
+		Ticket foundTicket = ticketDao.findByBookingId(bookingId);
+		if (foundTicket == null) {
+			LOGGER.log(Level.SEVERE, "No reserved Ticket with the Booking ID :" + bookingId + " found.");
 			return null;
 		} else {
 			return foundTicket;

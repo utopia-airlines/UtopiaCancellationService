@@ -44,7 +44,7 @@ public class Ticket {
 	private Integer price;
 
 	private LocalDateTime reservationTimeout;
-
+    
 	private String bookingId;
 
 	/**
