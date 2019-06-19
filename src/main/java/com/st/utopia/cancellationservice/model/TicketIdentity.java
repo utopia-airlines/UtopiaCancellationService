@@ -77,7 +77,9 @@ public class TicketIdentity implements Serializable {
 		if (this == obj) {
 			return true;
 		} else if (obj instanceof TicketIdentity) {
-			return Objects.equals(flight, ((TicketIdentity) obj).flight);
+			return Objects.equals(flight, ((TicketIdentity) obj).flight)
+					&& Objects.equals(row, ((TicketIdentity) obj).row)
+					&& Objects.equals(seat, ((TicketIdentity) obj).seat);
 		}
 		return false;
 	}
