@@ -17,4 +17,11 @@ public interface TicketDao extends JpaRepository<Ticket, TicketIdentity> {
 		return findById(new TicketIdentity(flight, row, seat)).orElse(null);
 	}
 
+	/**
+	 * Get the ticket, if any, with the given booking ID.
+	 * 
+	 * @param bookingId the booking ID
+	 * @return the ticket with that booking ID, if any
+	 */
+	Ticket findByBookingId(String bookingId);
 }
